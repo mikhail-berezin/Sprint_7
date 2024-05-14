@@ -38,7 +38,7 @@ public class CreateOrderTest {
 
     @Test
     @DisplayName("Check order can be created")
-    public void creatingOrderTest() {
+    public void checkOrderCanBeCreated() {
         OrderCreateDto orderCreateDto = new OrderCreateDto(
                 CUSTOMER_FIRST_NAME,
                 CUSTOMER_LAST_NAME,
@@ -76,7 +76,7 @@ public class CreateOrderTest {
         return response;
     }
 
-    @Step("Send POST request to /api/v1/orders/cancel")
+    @Step("Send PUT request to /api/v1/orders/cancel")
     public Response cancelOrder(CancelOrderDto cancelOrderDto) {
 
         Response response = given()

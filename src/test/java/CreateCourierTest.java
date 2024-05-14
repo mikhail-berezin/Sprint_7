@@ -4,7 +4,6 @@ import io.restassured.response.Response;
 import model.CourierLoginDto;
 import model.CourierLoginResult;
 import model.CreateCourierDto;
-import org.apache.http.protocol.HTTP;
 import org.junit.After;
 import org.junit.Test;
 
@@ -18,7 +17,7 @@ public class CreateCourierTest {
 
     @Test
     @DisplayName("Check courier can be created")
-    public void testCourierCanBeCreated() {
+    public void checkCourierCanBeCreated() {
         createCourier(new CreateCourierDto(COURIER_LOGIN, COURIER_PASSWORD, COURIER_FIRST_NAME));
 
         Response courierLoginResponse = loginCourier(new CourierLoginDto(COURIER_LOGIN, COURIER_PASSWORD));
@@ -27,7 +26,7 @@ public class CreateCourierTest {
 
     @Test
     @DisplayName("Check courier can not be created twice")
-    public void testCourierCanNotBeCreatedTwice() {
+    public void checkCourierCanNotBeCreatedTwice() {
         createCourier(new CreateCourierDto(COURIER_LOGIN, COURIER_PASSWORD, COURIER_FIRST_NAME));
 
         Response createCourierCopyResponse =
@@ -36,8 +35,8 @@ public class CreateCourierTest {
     }
 
     @Test
-    @DisplayName("Check courier can not be created without required fields")
-    public void testCourierCanNotBeCreatedWithoutRequiredFields() {
+    @DisplayName("Check courier can not be created without any of required fields")
+    public void checkCourierCanNotBeCreatedWithoutRequiredFields() {
         createCourier(new CreateCourierDto(EMPTY_STRING, COURIER_PASSWORD, COURIER_FIRST_NAME));
         createCourier(new CreateCourierDto(COURIER_LOGIN, EMPTY_STRING, COURIER_FIRST_NAME));
 
@@ -47,7 +46,7 @@ public class CreateCourierTest {
 
     @Test
     @DisplayName("Check courier creating response status is 201")
-    public void testCourierCreatingStatus() {
+    public void checkCourierCreatingStatus() {
         Response creatingCourierResponse =
                 createCourier(new CreateCourierDto(COURIER_LOGIN, COURIER_PASSWORD, COURIER_FIRST_NAME));
 
@@ -56,7 +55,7 @@ public class CreateCourierTest {
 
     @Test
     @DisplayName("Check courier creating OK field contains true value")
-    public void testCourierCreatingOk() {
+    public void checkCourierCreatingOk() {
         Response creatingCourierResponse =
                 createCourier(new CreateCourierDto(COURIER_LOGIN, COURIER_PASSWORD, COURIER_FIRST_NAME));
 
@@ -65,7 +64,7 @@ public class CreateCourierTest {
 
     @Test
     @DisplayName("Check courier can not be created without login")
-    public void testCourierCanNotBeCreatedWithoutLogin() {
+    public void checkCourierCanNotBeCreatedWithoutLogin() {
         Response createCourierWithoutLoginResponse =
                 createCourier(new CreateCourierDto(EMPTY_STRING, COURIER_PASSWORD, COURIER_FIRST_NAME));
         checkStatusIs400(createCourierWithoutLoginResponse);
@@ -77,7 +76,7 @@ public class CreateCourierTest {
 
     @Test
     @DisplayName("Check different couriers can not be created with same login")
-    public void testCreatingCouriersWithSameLogin() {
+    public void checkCreatingCouriersWithSameLogin() {
         createCourier(new CreateCourierDto(COURIER_LOGIN, COURIER_PASSWORD, COURIER_FIRST_NAME));
 
         Response creatingCourierResponse =
