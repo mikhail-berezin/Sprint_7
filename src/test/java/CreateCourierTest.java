@@ -4,12 +4,14 @@ import io.restassured.response.Response;
 import model.CourierLoginDto;
 import model.CourierLoginResult;
 import model.CreateCourierDto;
+import org.apache.http.protocol.HTTP;
 import org.junit.After;
 import org.junit.Test;
 
 import static constants.ScooterTestConstants.*;
 import static io.restassured.RestAssured.given;
 import static org.apache.http.HttpStatus.*;
+import static org.apache.http.protocol.HTTP.CONTENT_TYPE;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 public class CreateCourierTest {
@@ -80,7 +82,7 @@ public class CreateCourierTest {
         createCourier(new CreateCourierDto(COURIER_LOGIN, COURIER_PASSWORD, COURIER_FIRST_NAME));
 
         Response creatingCourierResponse =
-                createCourier(new CreateCourierDto(COURIER_LOGIN, "another pwd", "bar"));
+                createCourier(new CreateCourierDto(COURIER_LOGIN, ANOTHER_PASSWORD, ANOTHER_COURIER_NAME));
 
         checkStatusIs409(creatingCourierResponse);
     }
@@ -96,7 +98,7 @@ public class CreateCourierTest {
     @Step("Send POST request to /api/v1/courier")
     public Response createCourier(CreateCourierDto createCourierDto) {
         Response response = given()
-                .header("Content-type", "application/json").and().body(createCourierDto)
+                .header(CONTENT_TYPE, JSON_CONTENT_TYPE).and().body(createCourierDto)
                 .post(CREATE_COURIER_ENDPOINT);
         return response;
     }
@@ -109,7 +111,7 @@ public class CreateCourierTest {
     @Step("Send POST request to /api/v1/courier/login")
     public Response loginCourier(CourierLoginDto courierLoginDto) {
         Response response = given()
-                .header("Content-type", "application/json").and().body(courierLoginDto)
+                .header(CONTENT_TYPE, JSON_CONTENT_TYPE).and().body(courierLoginDto)
                 .post(LOGIN_COURIER_ENDPOINT);
         return response;
     }
@@ -141,7 +143,7 @@ public class CreateCourierTest {
 
     @Step("Check response ok field")
     public void checkOkFieldIsTrue(Response response) {
-        response.then().body("ok", equalTo(true));
+        response.then().body(OK_FIELD, equalTo(true));
     }
 
     @Step("Send DELETE request to /api/v1/courier")

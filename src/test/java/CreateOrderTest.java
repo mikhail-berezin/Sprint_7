@@ -14,6 +14,7 @@ import java.util.List;
 
 import static constants.ScooterTestConstants.*;
 import static io.restassured.RestAssured.given;
+import static org.apache.http.protocol.HTTP.CONTENT_TYPE;
 
 @RunWith(Parameterized.class)
 public class CreateOrderTest {
@@ -69,7 +70,7 @@ public class CreateOrderTest {
     public Response createOrder(OrderCreateDto orderCreateDto) {
 
         Response response = given()
-                .header("Content-type", "application/json").and().body(orderCreateDto)
+                .header(CONTENT_TYPE, JSON_CONTENT_TYPE).and().body(orderCreateDto)
                 .post(ORDERS_ENDPOINT);
 
         return response;
@@ -79,7 +80,7 @@ public class CreateOrderTest {
     public Response cancelOrder(CancelOrderDto cancelOrderDto) {
 
         Response response = given()
-                .header("Content-type", "application/json").and().body(cancelOrderDto)
+                .header(CONTENT_TYPE, JSON_CONTENT_TYPE).and().body(cancelOrderDto)
                 .put(CANCEL_ORDER_ENDPOINT);
 
         return response;
@@ -87,6 +88,6 @@ public class CreateOrderTest {
 
     @Step("Check response contains track number")
     public void checkTrackNumberIsNotNull(Response response) {
-        response.then().body("track", CoreMatchers.notNullValue());
+        response.then().body(TRACK_FIELD, CoreMatchers.notNullValue());
     }
 }

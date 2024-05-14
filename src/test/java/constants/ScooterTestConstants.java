@@ -26,6 +26,18 @@ public class ScooterTestConstants {
 
     public static final String INCORRECT_LOGIN = "zavedomoplohoilogin";
     public static final String INCORRECT_PASSWORD = "0000";
+    public static final String ANOTHER_PASSWORD = "anotherpwd";
+    public static final String ANOTHER_COURIER_NAME = "bar";
+
+    public static final String JSON_CONTENT_TYPE = "application/json";
+
+    public static final String ID_FIELD = "id";
+    public static final String OK_FIELD = "ok";
+    public static final String MESSAGE_FIELD = "message";
+    public static final String ORDERS_FIELD = "orders";
+    public static final String TRACK_FIELD = "track";
+
+    public static final String INCOMPLETE_DATA_MESSAGE = "Недостаточно данных для входа";
 
     public static final String EMPTY_STRING = "";
 }

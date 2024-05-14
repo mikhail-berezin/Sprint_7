@@ -27,6 +27,6 @@ public class OrderListTest {
 
     @Step("Checking OK response status and not null content")
     public void checkResponseStatusAndContent(Response orderCreateResponse) {
-        orderCreateResponse.then().statusCode(SC_OK).and().body("orders", CoreMatchers.notNullValue());
+        orderCreateResponse.then().statusCode(SC_OK).and().body(ORDERS_FIELD, CoreMatchers.notNullValue());
     }
 }

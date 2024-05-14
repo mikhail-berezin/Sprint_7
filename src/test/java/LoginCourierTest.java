@@ -12,6 +12,7 @@ import org.junit.Test;
 import static constants.ScooterTestConstants.*;
 import static io.restassured.RestAssured.given;
 import static org.apache.http.HttpStatus.*;
+import static org.apache.http.protocol.HTTP.CONTENT_TYPE;
 import static org.hamcrest.CoreMatchers.*;
 
 public class LoginCourierTest { ;
@@ -53,10 +54,10 @@ public class LoginCourierTest { ;
     @DisplayName("Check authorization with incorrect field error text")
     public void checkAuthorizationWithoutAnyFieldError() {
         Response responseWithoutLogin = loginCourier(new CourierLoginDto(EMPTY_STRING, COURIER_PASSWORD));
-        checkErrorText(responseWithoutLogin, "Недостаточно данных для входа");
+        checkErrorText(responseWithoutLogin, INCOMPLETE_DATA_MESSAGE);
 
         Response responseWithoutPassword = loginCourier(new CourierLoginDto(COURIER_LOGIN, EMPTY_STRING));
-        checkErrorText(responseWithoutPassword, "Недостаточно данных для входа");
+        checkErrorText(responseWithoutPassword, INCOMPLETE_DATA_MESSAGE);
     }
 
     @Test
@@ -83,10 +84,10 @@ public class LoginCourierTest { ;
 
     @Step("Prepare courier")
     public void createCourier() {
-        CreateCourierDto createCourierDto = new CreateCourierDto(COURIER_LOGIN, COURIER_PASSWORD, "foo");
+        CreateCourierDto createCourierDto = new CreateCourierDto(COURIER_LOGIN, COURIER_PASSWORD, COURIER_FIRST_NAME);
 
         given()
-                .header("Content-type", "application/json").and().body(createCourierDto)
+                .header(CONTENT_TYPE, JSON_CONTENT_TYPE).and().body(createCourierDto)
                 .post(CREATE_COURIER_ENDPOINT);
     }
 
@@ -94,7 +95,7 @@ public class LoginCourierTest { ;
     public Response loginCourier(CourierLoginDto courierLoginDto) {
 
         Response response = given()
-                .header("Content-type", "application/json").and().body(courierLoginDto)
+                .header(CONTENT_TYPE, JSON_CONTENT_TYPE).and().body(courierLoginDto)
                 .post(LOGIN_COURIER_ENDPOINT);
 
         return response;
@@ -117,12 +118,12 @@ public class LoginCourierTest { ;
 
     @Step("Check response has courier id")
     public void checkResponseHasId(Response response) {
-        response.then().body("id", notNullValue()).and().body("id", isA(Integer.class));
+        response.then().body("id", notNullValue()).and().body(ID_FIELD, isA(Integer.class));
     }
 
     @Step("Check response has correct error text")
     public void checkErrorText(Response response, String errorMessage) {
-        response.then().body("message", equalTo(errorMessage));
+        response.then().body(MESSAGE_FIELD, equalTo(errorMessage));
     }
 
     @Step("Search for existing user and get id")
