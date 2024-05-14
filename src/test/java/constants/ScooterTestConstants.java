@@ -1,7 +1,5 @@
 package constants;
 
-import static java.time.LocalDate.now;
-
 public class ScooterTestConstants {
 
     public static final String SCOOTER_URL = "http://qa-scooter.praktikum-services.ru";

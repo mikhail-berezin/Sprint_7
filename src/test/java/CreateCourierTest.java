@@ -73,7 +73,6 @@ public class CreateCourierTest {
         Response createCourierWithoutPasswordResponse =
                 createCourier(new CreateCourierDto(COURIER_LOGIN, EMPTY_STRING, COURIER_FIRST_NAME));
         checkStatusIs400(createCourierWithoutPasswordResponse);
-
     }
 
     @Test

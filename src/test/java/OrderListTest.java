@@ -2,12 +2,12 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Step;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
-import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 
 import static constants.ScooterTestConstants.*;
 import static io.restassured.RestAssured.given;
 import static org.apache.http.HttpStatus.SC_OK;
+import static org.hamcrest.CoreMatchers.notNullValue;
 
 public class OrderListTest {
 
@@ -27,6 +27,6 @@ public class OrderListTest {
 
     @Step("Checking OK response status and not null content")
     public void checkResponseStatusAndContent(Response orderCreateResponse) {
-        orderCreateResponse.then().statusCode(SC_OK).and().body(ORDERS_FIELD, CoreMatchers.notNullValue());
+        orderCreateResponse.then().statusCode(SC_OK).and().body(ORDERS_FIELD, notNullValue());
     }
 }
