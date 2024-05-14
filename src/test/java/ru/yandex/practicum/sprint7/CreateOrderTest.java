@@ -14,6 +14,7 @@ import org.junit.runners.Parameterized;
 
 import java.util.List;
 
+import static ru.yandex.practicum.sprint7.CommonSteps.checkStatusIs201;
 import static ru.yandex.practicum.sprint7.constants.ScooterTestConstants.*;
 import static io.restassured.RestAssured.given;
 import static org.apache.http.protocol.HTTP.CONTENT_TYPE;
@@ -57,6 +58,7 @@ public class CreateOrderTest {
         if (createOrderResult != null) {
             track = createOrderResult.track;
         }
+        checkStatusIs201(orderCreateResponse);
         checkTrackNumberIsNotNull(orderCreateResponse);
     }
 
