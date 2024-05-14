@@ -2,7 +2,9 @@ package ru.yandex.practicum.sprint7;
 
 import io.qameta.allure.Step;
 import io.qameta.allure.junit4.DisplayName;
+import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import org.junit.Before;
 import ru.yandex.practicum.sprint7.model.CourierLoginDto;
 import ru.yandex.practicum.sprint7.model.CourierLoginResult;
 import ru.yandex.practicum.sprint7.model.CreateCourierDto;
@@ -16,6 +18,11 @@ import static org.apache.http.protocol.HTTP.CONTENT_TYPE;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 public class CreateCourierTest {
+
+    @Before
+    public void setUp() {
+        RestAssured.baseURI = SCOOTER_URL;
+    }
 
     @Test
     @DisplayName("Check courier can be created")

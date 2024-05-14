@@ -3,11 +3,11 @@ package ru.yandex.practicum.sprint7.constants;
 public class ScooterTestConstants {
 
     public static final String SCOOTER_URL = "http://qa-scooter.praktikum-services.ru";
-    public static final String CREATE_COURIER_ENDPOINT = SCOOTER_URL + "/api/v1/courier";
-    public static final String DELETE_COURIER_ENDPOINT_PREFIX = SCOOTER_URL + "/api/v1/courier/";
-    public static final String LOGIN_COURIER_ENDPOINT = SCOOTER_URL + "/api/v1/courier/login";
-    public static final String ORDERS_ENDPOINT = SCOOTER_URL + "/api/v1/orders";
-    public static final String CANCEL_ORDER_ENDPOINT = SCOOTER_URL + "/api/v1/orders/cancel";
+    public static final String CREATE_COURIER_ENDPOINT = "/api/v1/courier";
+    public static final String DELETE_COURIER_ENDPOINT_PREFIX = "/api/v1/courier/";
+    public static final String LOGIN_COURIER_ENDPOINT = "/api/v1/courier/login";
+    public static final String ORDERS_ENDPOINT = "/api/v1/orders";
+    public static final String CANCEL_ORDER_ENDPOINT = "/api/v1/orders/cancel";
 
     public static final String COURIER_LOGIN = "mikhailberezintest";
     public static final String COURIER_PASSWORD = "1234";

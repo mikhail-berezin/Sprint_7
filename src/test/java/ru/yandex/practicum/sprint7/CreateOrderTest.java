@@ -2,7 +2,9 @@ package ru.yandex.practicum.sprint7;
 
 import io.qameta.allure.Step;
 import io.qameta.allure.junit4.DisplayName;
+import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import org.junit.Before;
 import ru.yandex.practicum.sprint7.model.CancelOrderDto;
 import ru.yandex.practicum.sprint7.model.CreateOrderResult;
 import ru.yandex.practicum.sprint7.model.OrderCreateDto;
@@ -37,6 +39,11 @@ public class CreateOrderTest {
                 {List.of("GREY")},
                 {List.of("BLACK", "GREY")}
         };
+    }
+
+    @Before
+    public void setUp() {
+        RestAssured.baseURI = SCOOTER_URL;
     }
 
     @Test

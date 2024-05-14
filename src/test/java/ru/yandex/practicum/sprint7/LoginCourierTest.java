@@ -3,6 +3,7 @@ package ru.yandex.practicum.sprint7;
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
 import io.qameta.allure.junit4.DisplayName;
+import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import ru.yandex.practicum.sprint7.model.CourierLoginDto;
 import ru.yandex.practicum.sprint7.model.CourierLoginResult;
@@ -20,7 +21,8 @@ import static org.hamcrest.CoreMatchers.*;
 public class LoginCourierTest {
 
     @Before
-    public void creatingCourier() {
+    public void setUp() {
+        RestAssured.baseURI = SCOOTER_URL;
         createCourier();
     }
 
